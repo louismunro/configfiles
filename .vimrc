@@ -37,6 +37,8 @@ set showmatch                   " showmatches as you type
 set hlsearch                    " highlight matches 
 set ignorecase                  " search is case insensitive by default
 set smartcase                   " unless you type a mix of upper and lower case
+highlight Search ctermfg=yellow cterm=underline ctermbg=black " make search results readable
+
 " clear out a search with <leader><space>
 nnoremap <leader><space> :noh<cr>
 
@@ -75,9 +77,6 @@ augroup resCur
   autocmd BufWinEnter * call ResCur()
 augroup END
 
-" set filetype for interactive use ( in bash, type c-x c-e )
-au BufRead,BufNewFile  bash-fc-* setfiletype sh
-
 " ********************************
 " LANGUAGE SPECIFIC SETTINGS
 " ********************************
@@ -97,13 +96,9 @@ au Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2
 " ********************************
 
 " closetag.vim settings (for html and xml)
-au Filetype html,xml,xsl source ~/.vim/bundle/closetag/scripts/closetag.vim
-
-" supertab settings
-set ofu=syntaxcomplete#Complete  " set omnicomplete
-let g:SuperTabDefaultCompletionType = "context"
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-n>"
+au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim 
 
 " perltidy
 nmap <leader>ry :%!perltidy -q<cr>
+
 
