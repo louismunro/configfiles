@@ -1,2 +1,0 @@
-download_script.php?src_id=16104: call delete('./doc/supertab.txt')|call delete('./plugin/supertab.vim')
-supertab.vba: call delete('/Users/lmunro/.vim/bundle/supertab//doc/supertab.txt')|call delete('/Users/lmunro/.vim/bundle/supertab//plugin/supertab.vim')
