@@ -1,3 +1,8 @@
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
+fi
+
 # set prompt 
 if [ -n "$PS1" ]; then 
     PS1='\[\033[1;33m\]\h \[\033[1;32m\]\u: \w\n${?##0}\$ \[\033[1;37m\]'; 
