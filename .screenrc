@@ -1,0 +1,3 @@
+escape ^Oo # Instead of Control-a, make the escape/command character be Control-o
+autodetach on # Autodetach session on hangup instead of terminating screen completely
+defscrollback 30000 # Use a 30000-line scrollback buffer
