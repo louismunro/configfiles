@@ -1,3 +1,6 @@
-escape ^Oo # Instead of Control-a, make the escape/command character be Control-o
+escape ^]] # Instead of Control-a, make the escape/command character be Control-]
 autodetach on # Autodetach session on hangup instead of terminating screen completely
+# status bar
+hardstatus on
+hardstatus alwayslastline "%{rk}%H %{gk}%c %{yk}%M%d %{wk}%?%-Lw%?%{bw}%n*%f %t%?(%u)%?%{wk}%?%+Lw%?"
 defscrollback 30000 # Use a 30000-line scrollback buffer
