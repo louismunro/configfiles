@@ -13,9 +13,11 @@ set cursorline                  " highlight current line
 set ttyfast                     " optimisation for ttys
 set laststatus=1                " show a status if there are mor than one file
 set scrolloff=3                 " keep at least three line visible before/after cursor
+set matchpairs+=<:>             " Allow % to bounce between angles too
 set pastetoggle=<F12>           " toggle paste mode with F12
-set matchpairs+=<:>             "Allow % to bounce between angles too
 
+nnoremap <F10> :registers<cr>
+nnoremap <F11> :buffers<CR>:buffer<Space>
 " The following lets :W acts like :w and :Q like :q
 cnoreabbrev W w
 cnoreabbrev Q q
@@ -56,6 +58,9 @@ vmap <s-tab> <gv
 " make tab in normal mode ident code
 nmap <tab> I<tab><esc>
 nmap <s-tab> ^i<bs><esc>
+
+" add git hook generated tags to ctags path
+set tags+=.git/tags
 
 " Tell vim to remember certain things when we exit
 "  '10  :  marks will be remembered for up to 10 previously edited files
