@@ -35,3 +35,4 @@ shopt -s extglob
 
 source ~/.bashfunc
 source ~/.bashalias
+source ~/.bashlocal
