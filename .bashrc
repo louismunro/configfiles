@@ -33,19 +33,5 @@ shopt -s cdspell
 # ksh-88 egrep-style extended pattern matching
 shopt -s extglob
 
-# ALIASES
-alias pu="pushd"
-alias po="popd"
-alias rm="rm -i"
-alias l="ls -hFG"
-alias ll="ls -lhFG"
-alias la="ls -alhFG"
-alias addalias="$EDITOR ~/.bashrc; source ~/.bashrc"
-
-bak () {
-    cp -i $1 ${1}.`date +%y%m%d`
-}
-
-cstream () {
-    perl -p -e "s/$1/\e[31m$&\e[0m/i"
-}
+source ~/.bashfunc
+source ~/.bashalias
