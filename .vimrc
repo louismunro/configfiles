@@ -86,6 +86,9 @@ augroup END
 " LANGUAGE SPECIFIC SETTINGS
 " ********************************
 
+" interactive shell syntax highlighting 
+au BufRead,BufNewFile  bash-fc-* setfiletype sh
+
 " Makefiles must use tabs
 au FileType make  set noexpandtab
 
