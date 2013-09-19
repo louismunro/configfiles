@@ -12,5 +12,5 @@ http() {
 
 penv () {
     # get the environment for a pid
-    tr '\0' '\n' <<< /proc/$1/environ
+    cat /proc/$1/environ | tr '\0' '\n' 
 }
