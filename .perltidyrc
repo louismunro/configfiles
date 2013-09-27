@@ -37,7 +37,6 @@
     -nolq   
 # Don't outdent long quoted strings
 
-    -wbb="% + - * / x != == >= <= =~ !~ < > | & >= < = **= += *= &= <<= &&= -=
-          /= |= >>= ||= .= %= ^= x="
+    -wbb="% + - * / x != == >= <= =~ !~ < > | & >= < = **= += *= &= <<= &&= -= /= |= >>= ||= .= %= ^= x="
             
 # Break before all operators
