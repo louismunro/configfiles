@@ -1,7 +1,7 @@
 [user]
 	name = Louis Munro
     # you chould configure this manually... 
-    # email = lmunro@inverse.ca
+    email = lmunro@inverse.ca
 
 [alias]
     st = status
@@ -13,3 +13,7 @@
     who = shortlog -s --
 [init]
 	templatedir = ~/.git_template
+[diff]
+	tool = vimdiff
+[difftool]
+	prompt = false

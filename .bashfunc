@@ -14,3 +14,8 @@ penv () {
     # get the environment for a pid
     cat /proc/$1/environ | tr '\0' '\n' 
 }
+
+pfcheck () { 
+    # check for pf services that should be started but aren't
+    service packetfence status | awk -F\| 'NR == 1; $2 == 1 && $3 == 0' 
+}

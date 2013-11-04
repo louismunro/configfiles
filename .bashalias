@@ -7,3 +7,5 @@ alias ll="ls -lhFG"
 alias la="ls -alhFG"
 alias addalias="$EDITOR ~/.bashalias; source ~/.bashalias"
 alias addfunc="$EDITOR ~/.bashfunc; source ~/.bashfunc"
+alias view='vim -R'
+
