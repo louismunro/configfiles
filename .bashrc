@@ -33,6 +33,10 @@ shopt -s cdspell
 # ksh-88 egrep-style extended pattern matching
 shopt -s extglob
 
+
+# complete ssh hostnames
+complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | cut -f 1 -d, | sort -u | grep -v '\['`; )" ssh
+
 source ~/.bashfunc
 source ~/.bashalias
 source ~/.bashlocal
