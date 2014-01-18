@@ -10,6 +10,7 @@ fi
 
 # VARIABLES 
 export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH
+export CDPATH=$CDPATH:.:/usr/local
 export MANPATH=/usr/local/man:opt/local/man:/opt/local/share/man:${MANPATH}
 export HISTCONTROL=ignoredups # ignore duplicate commands in history
 export EDITOR=/usr/bin/vim # set vi as default editor
