@@ -16,6 +16,9 @@ set scrolloff=3                 " keep at least three line visible before/after 
 set matchpairs+=<:>             " Allow % to bounce between angles too
 set pastetoggle=<F12>           " toggle paste mode with F12
 
+" dont use Q for Ex mode
+map Q :q
+"
 nnoremap <F10> :registers<cr>
 nnoremap <F11> :buffers<CR>:buffer<Space>
 " The following lets :W acts like :w and :Q like :q
@@ -98,6 +101,14 @@ au Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
 " so does html. We set indentation to 2 spaces
 au Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
+" check perl code with :make
+autocmd FileType perl set makeprg=perl\ -c\ %\ $*
+autocmd FileType perl set errorformat=%f:%l:%m
+autocmd FileType perl set autowrite
+
+" perltidy
+nnoremap <leader>ry :%!perltidy -q<cr>
+vnoremap <leader>ry :!perltidy -q<Enter>
 
 " ********************************
 " PLUGINS SETTINGS
@@ -106,7 +117,5 @@ au Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2
 " closetag.vim settings (for html and xml)
 au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim 
 
-" perltidy
-nmap <leader>ry :%!perltidy -q<cr>
 
 
