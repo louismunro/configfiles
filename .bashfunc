@@ -19,3 +19,11 @@ pfcheck () {
     # check for pf services that should be started but aren't
     service packetfence status | awk -F\| 'NR == 1; $2 == 1 && $3 == 0' 
 }
+
+function lc {
+    tr [[:upper:]] [[:lower:]] < /dev/stdin 
+} 
+
+function uc {
+    tr [[:lower:]] [[:upper:]] < /dev/stdin 
+} 
