@@ -27,3 +27,11 @@ function lc {
 function uc {
     tr [[:lower:]] [[:upper:]] < /dev/stdin 
 } 
+
+function parse_git_dirty {
+ git diff --no-ext-diff --quiet --exit-code &> /dev/null || echo "*"
+}
+
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
+}
