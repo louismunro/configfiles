@@ -8,5 +8,6 @@ alias la="ls -alhFG"
 alias ltr="ls -lhtr"
 alias view="vim -R"
 alias v="vim"
+alias psef='ps -ef | grep'
 alias addalias="$EDITOR ~/.bashalias; source ~/.bashalias"
 alias addfunc="$EDITOR ~/.bashfunc; source ~/.bashfunc"
