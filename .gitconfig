@@ -13,3 +13,5 @@
     who = shortlog -s --
 [init]
 	templatedir = ~/.git_template
+[push]
+	default = current
