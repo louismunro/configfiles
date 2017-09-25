@@ -85,6 +85,10 @@ augroup resCur
   autocmd BufWinEnter * call ResCur()
 augroup END
 
+" remap jj as esc key
+ino jj <esc>
+cno jj <c-c>
+
 " ********************************
 " LANGUAGE SPECIFIC SETTINGS
 " ********************************
@@ -106,6 +110,16 @@ autocmd FileType perl set autowrite
 " perltidy
 nnoremap <leader>ry :%!perltidy -q<cr>
 vnoremap <leader>ry :!perltidy -q<Enter>
+
+" golang
+let g:go_fmt_command = "goimports"
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_types = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_trailing_whitespace_error = 0
 
 " ********************************
 " PLUGINS SETTINGS

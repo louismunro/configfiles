@@ -11,3 +11,4 @@ alias v="vim"
 alias psef='ps -ef | grep'
 alias addalias="$EDITOR ~/.bashalias; source ~/.bashalias"
 alias addfunc="$EDITOR ~/.bashfunc; source ~/.bashfunc"
+alias addlocal="$EDITOR ~/.bashlocal; source ~/.bashlocal"
