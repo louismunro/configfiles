@@ -129,4 +129,5 @@ let g:go_highlight_trailing_whitespace_error = 0
 au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim 
 
 
-
+" vim-ansible settings (used for yaml)
+autocmd BufNewFile,BufRead *.yaml  set ft=ansible
