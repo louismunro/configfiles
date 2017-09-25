@@ -122,3 +122,7 @@ nmap <leader>ry :%!perltidy -q<cr>
 
 " vim-ansible settings (used for yaml)
 autocmd BufNewFile,BufRead *.yaml  set ft=ansible
+
+" vim-json 
+" Disable syntax concealing (hides quotes)
+let g:vim_json_syntax_conceal = 0
