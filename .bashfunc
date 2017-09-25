@@ -5,3 +5,36 @@ bak () {
 cstream () {
     perl -p -e "s/$1/\e[31m$&\e[0m/i"
 }
+
+http() {
+    curl http://httpcode.info/$1;
+}
+
+penv () {
+    # get the environment for a pid
+    cat /proc/$1/environ | tr '\0' '\n' 
+}
+
+function lc {
+    tr [[:upper:]] [[:lower:]] < /dev/stdin 
+} 
+
+function uc {
+    tr [[:lower:]] [[:upper:]] < /dev/stdin 
+} 
+
+function parse_git_dirty {
+ git diff --no-ext-diff --quiet --exit-code &> /dev/null || echo "*"
+}
+
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/(\1$(parse_git_dirty))/"
+}
+
+function ssh { 
+    if [[ -z "$SSH_AGENT_PID" ]] ; then 
+        eval `ssh-agent`
+        ssh-add
+    fi
+    command ssh "$@"
+}
