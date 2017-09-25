@@ -120,4 +120,5 @@ au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
 " perltidy
 nmap <leader>ry :%!perltidy -q<cr>
 
-
+" vim-ansible settings (used for yaml)
+autocmd BufNewFile,BufRead *.yaml  set ft=ansible
