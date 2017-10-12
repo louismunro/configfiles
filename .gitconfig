@@ -2,7 +2,7 @@
 	name = Louis Munro
 	email = lm@louismunro.com
     # you chould configure this manually... 
-    # email = lmunro@inverse.ca
+    email = lm@louismunro.com
 
 [alias]
     st = status
