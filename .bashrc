@@ -8,7 +8,7 @@ fi
 
 # set prompt 
 if [ -n "$PS1" ]; then 
-    PS1='\[\033[1;33m\]\H \[\033[1;32m\]\u: \w\n${?##0}\$ \[\033[1;37m\]'; 
+    PS1='$( __kube_ps1 ) \[\033[1;33m\]\H \[\033[1;32m\]\u: \w  $( parse_git_branch )\n${?##0}\$ \[\033[1;37m\]'; 
 fi
 
 # VARIABLES 
