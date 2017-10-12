@@ -126,3 +126,6 @@ autocmd BufNewFile,BufRead *.yaml  set ft=ansible
 " vim-json 
 " Disable syntax concealing (hides quotes)
 let g:vim_json_syntax_conceal = 0
+
+" nerdtree (Control n)
+map <C-n> :NERDTreeToggle<CR>

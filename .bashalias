@@ -8,3 +8,7 @@ alias la="ls -alhFG"
 alias addalias="$EDITOR ~/.bashalias; source ~/.bashalias"
 alias addfunc="$EDITOR ~/.bashfunc; source ~/.bashfunc"
 alias addlocal="$EDITOR ~/.bashlocal; source ~/.bashlocal"
+
+alias k=kubectl
+alias v=vim
+alias g=git
