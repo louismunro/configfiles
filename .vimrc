@@ -26,6 +26,9 @@ cnoreabbrev Q q
 syntax enable
 set background=dark
 colorscheme ir_black
+if &diff
+    colorscheme ir_black_override
+endif       
 set guifont=Monaco:h12
 set guioptions-=T
 
