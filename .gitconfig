@@ -1,7 +1,7 @@
 [user]
 	name = Louis Munro
     # you chould configure this manually... 
-    email = lmunro@inverse.ca
+    email = lm@louismunro.com
 
 [alias]
     st = status
@@ -21,3 +21,5 @@
 	pager = more
 [push]
 	default = matching
+[core]
+	pager = ''
