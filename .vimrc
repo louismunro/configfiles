@@ -11,7 +11,7 @@ set wildmenu                    " show possible matches when completing commands
 set wildmode=list:longest       " options to wildmenu
 set cursorline                  " highlight current line
 set ttyfast                     " optimisation for ttys
-set laststatus=1                " show a status if there are mor than one file
+set laststatus=2                " show a status if there are mor than one file
 set scrolloff=3                 " keep at least three line visible before/after cursor
 set matchpairs+=<:>             " Allow % to bounce between angles too
 set pastetoggle=<F12>           " toggle paste mode with F12
