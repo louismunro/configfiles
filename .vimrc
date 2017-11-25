@@ -127,7 +127,8 @@ au Filetype html,xml,xsl source ~/.vim/scripts/closetag.vim
 nmap <leader>ry :%!perltidy -q<cr>
 
 " vim-ansible settings (used for yaml)
-autocmd BufNewFile,BufRead *.yaml  set ft=ansible
+autocmd BufNewFile,BufRead *yaml  set ft=ansible
+au Filetype ansible setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " vim-json 
 " Disable syntax concealing (hides quotes)
@@ -135,3 +136,7 @@ let g:vim_json_syntax_conceal = 0
 
 " nerdtree (Control n)
 map <C-n> :NERDTreeToggle<CR>
+
+" vim-terraform
+let g:terraform_align=1
+

@@ -15,3 +15,5 @@ alias v=vim
 alias g=git
 alias vg='vagrant'
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+alias kstatus='kubectl get componentstatuses'
+alias tf=terraform
