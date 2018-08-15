@@ -52,3 +52,20 @@ __kube_ps1()
 function aws_account_info {
   [ "$AWS_ACCOUNT_NAME" ] && [ "$AWS_ACCOUNT_ROLE" ] && echo -n "aws:($AWS_ACCOUNT_NAME:$AWS_ACCOUNT_ROLE) "
 }
+
+function json2yaml { 
+   ruby -ryaml -rjson -e 'puts YAML.dump(JSON.parse(STDIN.read))' <  $1
+}
+
+function yaml2json {
+  ruby -ryaml -rjson -e 'puts YAML.load_file(ARGV[0]).to_json'  $1
+}
+
+function kcrash { 
+    # kubectl get pods -owide --all-namespaces | awk 'NR == 1 || $4 !~ /Running|Completed/'
+    # print all rows for whick the NR > 1 and the number of running containers is not x/x and the state is not Completed
+    kubectl get pods -owide --all-namespaces |
+            perl -wanl -e  '( $. == 1 
+                            || ( eval($F[2]) != 1 && $F[3] !~ /Completed/ )
+                            ) && print'
+} 
