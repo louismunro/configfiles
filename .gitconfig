@@ -1,8 +1,7 @@
 [user]
-	name = Louis Munro
-	email = lm@louismunro.com
+	name = Munro, Louis
+	email = LMunro@nuglif.com
     # you chould configure this manually... 
-    email = lm@louismunro.com
 
 [alias]
     st = status

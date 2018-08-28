@@ -24,3 +24,5 @@ alias knodes="kubectl get nodes -owide"
 alias ltr='ls -ltrh'
 # enable completion for "k" in addition to kubectl
 complete -o default -o nospace -F __start_kubectl k
+# weather!
+alias wtr='curl http://wttr.in/montreal'

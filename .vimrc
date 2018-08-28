@@ -89,6 +89,26 @@ augroup END
 ino jj <esc>
 cno jj <c-c>
 
+" The Silver Searcher
+if executable('ag')
+  " Use ag over grep
+  set grepprg=ag\ --nogroup\ --nocolor
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
+
+
+"Set this to 1 to set searching by filename (not full path) as the default:
+let g:ctrlp_by_filename = 0
+
+" bind K to grep word under cursor
+nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+"command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
+
 " ********************************
 " LANGUAGE SPECIFIC SETTINGS
 " ********************************
@@ -140,3 +160,5 @@ map <C-n> :NERDTreeToggle<CR>
 " vim-terraform
 let g:terraform_align=1
 
+" ALE
+let g:ale_set_highlights = 0
