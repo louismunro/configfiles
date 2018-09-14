@@ -15,6 +15,7 @@ set laststatus=2                " show a status if there are mor than one file
 set scrolloff=3                 " keep at least three line visible before/after cursor
 set matchpairs+=<:>             " Allow % to bounce between angles too
 set pastetoggle=<F12>           " toggle paste mode with F12
+set nu                          " show line numbers
 
 nnoremap <F10> :registers<cr>
 nnoremap <F11> :buffers<CR>:buffer<Space>
@@ -26,6 +27,13 @@ cnoreabbrev Q q
 syntax enable
 set background=dark
 colorscheme ir_black
+
+if has('gui_running')
+    set background=light
+    colorscheme solarized
+else
+    set background=dark
+endif
 if &diff
     colorscheme ir_black_override
 endif       
@@ -135,6 +143,9 @@ let g:go_highlight_types = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_trailing_whitespace_error = 0
+
+" jenkins!
+au BufNewFile,BufRead Jenkinsfile setf groovy
 
 " ********************************
 " PLUGINS SETTINGS

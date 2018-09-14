@@ -14,7 +14,6 @@ alias v=vim
 alias g=git
 alias vg='vagrant'
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
-alias kstatus='kubectl get componentstatuses'
 alias tf=terraform
 alias kpods='kubectl get pods --all-namespaces -owide'
 alias kc="kubectl config use-context"
@@ -24,5 +23,3 @@ alias knodes="kubectl get nodes -owide"
 alias ltr='ls -ltrh'
 # enable completion for "k" in addition to kubectl
 complete -o default -o nospace -F __start_kubectl k
-# weather!
-alias wtr='curl http://wttr.in/montreal'
