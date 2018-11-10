@@ -11,6 +11,7 @@ alias addlocal="$EDITOR ~/.bashlocal; source ~/.bashlocal"
 alias k=kubectl
 alias kdesc="kubectl describe"
 alias v=vim
+alias nv=nvim
 alias g=git
 alias vg='vagrant'
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'

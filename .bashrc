@@ -12,7 +12,7 @@ if [ -n "$PS1" ]; then
 fi
 
 # VARIABLES 
-export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:$PATH
+export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:~/bin:$PATH
 export MANPATH=/usr/local/man:opt/local/man:/opt/local/share/man:${MANPATH}
 export HISTCONTROL=ignoredups # ignore duplicate commands in history
 export HISTSIZE=10000

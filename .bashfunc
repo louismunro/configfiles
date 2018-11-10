@@ -69,3 +69,10 @@ function kcrash {
                             || ( eval($F[2]) != 1 && $F[3] !~ /Completed/ )
                             ) && print'
 } 
+
+# roule une commande sur chacune des nodes
+krun() {
+  for k in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}' ) ; do 
+    echo -n "$k :" ; ssh $k $@
+  done
+}

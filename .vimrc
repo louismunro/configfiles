@@ -1,4 +1,39 @@
+" I still have a few things managed throught pathogen
 call pathogen#infect()
+" Specify a directory for plugins
+" - For Neovim: ~/.local/share/nvim/plugged
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+    " Make sure you use single quotes
+    if has('nvim')
+        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+        Plug 'zchee/deoplete-go', { 'do': 'make'}
+        Plug 'jodosha/vim-godebug'
+        Plug 'hashivim/vim-terraform'
+        Plug 'juliosueiras/vim-terraform-completion'
+        let g:deoplete#omni_patterns = {}
+        let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
+        let g:deoplete#enable_at_startup = 1
+    endif
+
+    Plug 'Yggdroot/indentLine'
+    Plug 'StanAngeloff/php.vim'
+    Plug 'chase/vim-ansible-yaml'
+    Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'elzr/vim-json'
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'majutsushi/tagbar'
+    Plug 'scrooloose/nerdtree'
+    Plug 'stephpy/vim-php-cs-fixer'
+    Plug 'tpope/vim-commentary' 
+    Plug 'tpope/vim-fugitive'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-syntastic/syntastic'
+" Initialize plugin system
+call plug#end()
+
+
+
 set nocompatible
 filetype plugin indent on
 set visualbell
@@ -31,14 +66,14 @@ colorscheme ir_black
 if has('gui_running')
     set background=light
     colorscheme solarized
+    set guifont=Monaco:h12
+    set guioptions-=T
 else
     set background=dark
 endif
 if &diff
     colorscheme ir_black_override
 endif       
-set guifont=Monaco:h12
-set guioptions-=T
 
 " search settings
 " the first two lines change the regex to PCRE. Caution: do not add ANYTHING 
@@ -79,7 +114,7 @@ set tags+=.git/tags
 "  :20  :  up to 20 lines of command-line history will be remembered
 "  %    :  saves and restores the buffer list
 "  n... :  where to save the viminfo files
-set viminfo='10,\"100,:20,%,n~/.viminfo
+"set viminfo='10,\"100,:20,%,n~/.viminfo
 
 function! ResCur()
   if line("'\"") <= line("$")
@@ -173,3 +208,37 @@ let g:terraform_align=1
 
 " ALE
 let g:ale_set_highlights = 0
+
+" terraform completion
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+" (Optional)Remove Info(Preview) window
+set completeopt-=preview
+
+" (Optional)Hide Info(Preview) window after completions
+autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
+autocmd InsertLeave * if pumvisible() == 0|pclose|endif
+
+" (Optional) Enable terraform plan to be include in filter
+let g:syntastic_terraform_tffilter_plan = 1
+
+" (Optional) Default: 0, enable(1)/disable(0) plugin's keymapping
+let g:terraform_completion_keys = 1
+
+" (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
+let g:terraform_registry_module_completion = 0
+
+" PHP fixer 
+" If you use php-cs-fixer version 2.x
+let g:php_cs_fixer_rules = "@PSR2"                  " options: --rules (default:@PSR2)
+"let g:php_cs_fixer_cache = ".php_cs.cache"         " options: --cache-file
+"let g:php_cs_fixer_config_file = '.php_cs'         " options: --config
+" End of php-cs-fixer version 2 config params
+
+let g:php_cs_fixer_php_path = "php"               " Path to PHP
+let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
+let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
+let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.
