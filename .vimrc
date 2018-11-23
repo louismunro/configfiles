@@ -16,19 +16,21 @@ call plug#begin('~/.vim/plugged')
         let g:deoplete#enable_at_startup = 1
     endif
 
-    Plug 'Yggdroot/indentLine'
     Plug 'StanAngeloff/php.vim'
+    Plug 'Yggdroot/indentLine'
     Plug 'chase/vim-ansible-yaml'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'elzr/vim-json'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'jiangmiao/auto-pairs'
     Plug 'majutsushi/tagbar'
     Plug 'scrooloose/nerdtree'
     Plug 'stephpy/vim-php-cs-fixer'
+    Plug 'tell-k/vim-autopep8'
     Plug 'tpope/vim-commentary' 
     Plug 'tpope/vim-fugitive'
     Plug 'vim-airline/vim-airline'
-    Plug 'vim-syntastic/syntastic'
+    "Plug 'vim-syntastic/syntastic'
 " Initialize plugin system
 call plug#end()
 
@@ -72,7 +74,7 @@ else
     set background=dark
 endif
 if &diff
-    colorscheme ir_black_override
+    colorscheme diff_override
 endif       
 
 " search settings
