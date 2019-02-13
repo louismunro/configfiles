@@ -49,3 +49,4 @@ source ~/.bashalias
 source ~/.bashlocal
 
 complete -C /usr/local/bin/vault vault
+source /Users/lmunro/.nuglif-env

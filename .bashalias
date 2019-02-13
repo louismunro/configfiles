@@ -15,7 +15,7 @@ alias nv=nvim
 alias g=git
 alias vg='vagrant'
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
-alias tf=terraform
+#alias tf=terraform
 alias kpods='kubectl get pods --all-namespaces -owide'
 alias kc="kubectl config use-context"
 alias kx=kubectx
@@ -24,3 +24,5 @@ alias knodes="kubectl get nodes -owide"
 alias ltr='ls -ltrh'
 # enable completion for "k" in addition to kubectl
 complete -o default -o nospace -F __start_kubectl k
+alias opout='unset OP_SESSION_nuglif'
+alias py=python3
