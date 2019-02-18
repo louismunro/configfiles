@@ -6,10 +6,6 @@ cstream () {
     perl -p -e "s/$1/\e[31m$&\e[0m/i"
 }
 
-http() {
-    curl http://httpcode.info/$1;
-}
-
 penv () {
     # get the environment for a pid
     cat /proc/$1/environ | tr '\0' '\n' 

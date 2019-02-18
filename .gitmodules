@@ -1,3 +1,0 @@
-[submodule "stash/aws/dev/common_scripts"]
-	path = stash/aws/dev/common_scripts
-	url = ssh://git@stash.lapresse.ca/aws/common_scripts.git

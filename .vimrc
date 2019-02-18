@@ -16,13 +16,15 @@ call plug#begin('~/.vim/plugged')
         let g:deoplete#enable_at_startup = 1
     endif
 
+    " Plug 'jiangmiao/auto-pairs'
+    "Plug 'vim-syntastic/syntastic'
+    Plug 'MattesGroeger/vim-bookmarks'
     Plug 'StanAngeloff/php.vim'
     Plug 'Yggdroot/indentLine'
     Plug 'chase/vim-ansible-yaml'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'elzr/vim-json'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-    " Plug 'jiangmiao/auto-pairs'
     Plug 'majutsushi/tagbar'
     Plug 'scrooloose/nerdtree'
     Plug 'stephpy/vim-php-cs-fixer'
@@ -30,7 +32,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-commentary' 
     Plug 'tpope/vim-fugitive'
     Plug 'vim-airline/vim-airline'
-    "Plug 'vim-syntastic/syntastic'
 " Initialize plugin system
 call plug#end()
 
