@@ -58,11 +58,11 @@ function yaml2json {
 }
 
 function kcrash { 
-    # kubectl get pods -owide --all-namespaces | awk 'NR == 1 || $4 !~ /Running|Completed/'
-    # print all rows for whick the NR > 1 and the number of running containers is not x/x and the state is not Completed
-    kubectl get pods -owide --all-namespaces |
+    local match
+    match=${1:-.}
+    kubectl get pods -owide  | grep $match |
             perl -wanl -e  '( $. == 1 
-                            || ( eval($F[2]) != 1 && $F[3] !~ /Completed/ )
+                            || ( eval($F[1]) != 1 && $F[2] !~ /Completed/ )
                             ) && print'
 } 
 export -f kcrash
@@ -91,9 +91,9 @@ op() {
     command op $@ 
 }
 
-tf() {
-    op && terraform $@
-} 
+#tf() {
+#    op && terraform $@
+#} 
 
 setcreds() {
     read -e -p "AWS_ACCESS_KEY_ID: " AWS_ACCESS_KEY_ID
@@ -101,3 +101,20 @@ setcreds() {
     export AWS_ACCESS_KEY_ID
     export AWS_SECRET_ACCESS_KEY
 }
+
+# alias kpods='kubectl get pods -owide'
+function kpods {
+    local match
+    match=${1:-.}
+    kubectl get pods -owide | grep $match
+}
+
+function goplay {
+  # requires github.com/wrouesnel/go-play
+  pushd $GOPATH/src/github.com/wrouesnel/go-play/goplay
+  make run
+  popd
+}
+export -f goplay
+
+

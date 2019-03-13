@@ -6,18 +6,13 @@ if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
 
-# set prompt 
-if [ -n "$PS1" ]; then 
-    PS1='\033[1;33m\]$( __kube_ps1 ) \[\033[1;32m\]: \w  $( parse_git_branch ) \n ${?##0}\$ \[\033[1;37m\]'; 
-fi
-
 # VARIABLES 
 export PATH=/opt/local/bin:/opt/local/sbin:/usr/local/bin:~/bin:$PATH
 export MANPATH=/usr/local/man:opt/local/man:/opt/local/share/man:${MANPATH}
-export HISTCONTROL=ignoredups # ignore duplicate commands in history
+export HISTCONTROL=ignoredups 
 export HISTSIZE=10000
-export EDITOR=/usr/bin/vim # set vi as default editor
-export PAGER=less # use less
+export EDITOR=nvim 
+export PAGER=less 
 export LESS=im # set pager options (see man 1 less)
 
 # SHELL OPTIONS
@@ -40,13 +35,39 @@ shopt -s cdspell
 shopt -s extglob
 
 # source bash completion on OS X 
-if [ -f $(brew --prefix)/etc/bash_completion ]; then
-    . $(brew --prefix)/etc/bash_completion
+# requires the bash-completion@2 package (the old one is broken)
+[[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
+if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
+    for f in $(brew --prefix)/etc/bash_completion.d/*; do
+        source $f
+    done
 fi
 
 source ~/.bashfunc
 source ~/.bashalias
 source ~/.bashlocal
 
-complete -C /usr/local/bin/vault vault
-source /Users/lmunro/.nuglif-env
+# load dev, but only if present and the shell is interactive
+if [[ -f /opt/dev/dev.sh ]] && [[ $- == *i* ]]; then
+  source /opt/dev/dev.sh
+fi
+
+# cloudplatform: add Shopify clusters to your local kubernetes config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/lmunro/.kube/config:/Users/lmunro/.kube/config.shopify.cloudplatform
+for file in /Users/lmunro/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
+kubectl-short-aliases
+
+# set prompt 
+if [ -n "$PS1" ]; then 
+    if [[ -f /usr/local/opt/kube-ps1/share/kube-ps1.sh ]]; then
+        # cf https://github.com/jonmosco/kube-ps1
+        source /usr/local/opt/kube-ps1/share/kube-ps1.sh
+        KUBE_PS1_SYMBOL_ENABLE=false
+        KUBE_PS1_CTX_COLOR=yellow
+        KUBE_PS1_NS_COLOR=yellow
+        PS1='$(kube_ps1)\[\033[1;32m\] \w  $( parse_git_branch ) \n ${?##0}\$ \[\033[1;37m\]'; 
+    else
+        PS1='\[\033[1;32m\]\w  $( parse_git_branch ) \n ${?##0}\$ \[\033[1;37m\]'; 
+    fi
+fi
+

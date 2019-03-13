@@ -1,6 +1,6 @@
 [user]
-	name = Munro, Louis
-	email = LMunro@nuglif.com
+	name =  Louis Munro
+	email = louis.munro@shopify.com
     # you chould configure this manually... 
 
 [alias]
@@ -15,3 +15,11 @@
 	templatedir = ~/.git_template
 [core]
 	pager = 
+	editor = nvim
+	excludesfile = /Users/lmunro/.gitignore
+[diff]
+	algorithm = patience
+[protocol]
+	version = 2
+[credential]
+	helper = osxkeychain

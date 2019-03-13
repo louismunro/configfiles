@@ -18,10 +18,11 @@ call plug#begin('~/.vim/plugged')
 
     " Plug 'jiangmiao/auto-pairs'
     "Plug 'vim-syntastic/syntastic'
-    Plug 'MattesGroeger/vim-bookmarks'
-    Plug 'StanAngeloff/php.vim'
+    " Plug 'MattesGroeger/vim-bookmarks'
+    " Plug 'StanAngeloff/php.vim'
     Plug 'Yggdroot/indentLine'
     Plug 'chase/vim-ansible-yaml'
+    Plug 'crusoexia/vim-monokai'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'elzr/vim-json'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -31,6 +32,8 @@ call plug#begin('~/.vim/plugged')
     Plug 'tell-k/vim-autopep8'
     Plug 'tpope/vim-commentary' 
     Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-rails'
+    Plug 'tpope/vim-rhubarb'
     Plug 'vim-airline/vim-airline'
 " Initialize plugin system
 call plug#end()
@@ -62,9 +65,11 @@ cnoreabbrev W w
 cnoreabbrev Q q
 
 " appearance
+set termguicolors
 syntax enable
 set background=dark
 colorscheme ir_black
+" colorscheme monokai
 
 if has('gui_running')
     set background=light
@@ -95,11 +100,11 @@ nnoremap <leader><space> :noh<cr>
 
 " indentation settings: only insert spaces
 set autoindent
-set tabstop=4                   " show actual tabs as 4 spaces
+set tabstop=2                   " show actual tabs as 4 spaces
 set smarttab                    " outdent when pressing backspace
 set expandtab                   " insert spaces instead of tabs
-set softtabstop=4               " how many columns vim uses when you hit Tab in insert mode
-set shiftwidth=4                " how many columns text is indented
+set softtabstop=2               " how many columns vim uses when you hit Tab in insert mode
+set shiftwidth=2                " how many columns text is indented
 " make tab in v mode ident code
 vmap <tab> >gv
 vmap <s-tab> <gv
@@ -155,6 +160,9 @@ let g:ctrlp_by_filename = 0
 nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
+" pane navigation
+set splitbelow
+set splitright
 " ********************************
 " LANGUAGE SPECIFIC SETTINGS
 " ********************************
@@ -173,7 +181,8 @@ au Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 
 " golang
-let g:go_fmt_command = "goimports"
+"let g:go_fmt_command = "goimports"
+let g:go_fmt_command = "goreturns"
 
 " let g:go_auto_type_info = 1
 let g:go_highlight_build_constraints = 1
