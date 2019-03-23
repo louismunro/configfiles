@@ -25,3 +25,5 @@ alias ltr='ls -ltrh'
 complete -o default -o nospace -F __start_kubectl k
 alias py=python3
 alias gst='git status'
+alias t=tig
+alias st='tig status'

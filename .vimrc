@@ -100,11 +100,11 @@ nnoremap <leader><space> :noh<cr>
 
 " indentation settings: only insert spaces
 set autoindent
-set tabstop=2                   " show actual tabs as 4 spaces
+set tabstop=4                   " show actual tabs as 4 spaces
 set smarttab                    " outdent when pressing backspace
 set expandtab                   " insert spaces instead of tabs
-set softtabstop=2               " how many columns vim uses when you hit Tab in insert mode
-set shiftwidth=2                " how many columns text is indented
+set softtabstop=4               " how many columns vim uses when you hit Tab in insert mode
+set shiftwidth=4                " how many columns text is indented
 " make tab in v mode ident code
 vmap <tab> >gv
 vmap <s-tab> <gv
@@ -176,15 +176,16 @@ au FileType make  set noexpandtab
 " ruby does it differenly, so we set local values based on filetype
 au Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
+" SHOP likes shell to look like ruby
+au Filetype sh setlocal tabstop=2 softtabstop=2 shiftwidth=2
+
 " so does html. We set indentation to 2 spaces
 au Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 
 " golang
-"let g:go_fmt_command = "goimports"
-let g:go_fmt_command = "goreturns"
+let g:go_fmt_command = "goimports"
 
-" let g:go_auto_type_info = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
@@ -194,12 +195,17 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:go_auto_sameids = 1
+"let g:go_auto_type_info = 1
 
+au FileType go nmap <leader>gb :GoBuild<cr>
 au FileType go nmap <leader>gc :GoCoverageToggle -short<cr>
 au Filetype go nmap <leader>ga <Plug>(go-alternate-edit)
 au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
 au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
 au FileType go nmap <leader>gt :GoTest -short<cr>
+autocmd FileType go nmap <Leader>i <Plug>(go-info)<Paste>
+let g:syntastic_go_checkers = ['go', 'golint', 'govet']
+
 " jenkins!
 au BufNewFile,BufRead Jenkinsfile setf groovy
 

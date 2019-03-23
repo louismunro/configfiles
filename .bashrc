@@ -35,13 +35,13 @@ shopt -s cdspell
 shopt -s extglob
 
 # source bash completion on OS X 
-# requires the bash-completion@2 package (the old one is broken)
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
-    for f in $(brew --prefix)/etc/bash_completion.d/*; do
-        source $f
-    done
-fi
+# if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
+#     for f in $(brew --prefix)/etc/bash_completion.d/*; do
+#         source $f
+#     done
+# fi
+source ~/.kube/kubectl_autocompletion
 
 source ~/.bashfunc
 source ~/.bashalias
