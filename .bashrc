@@ -1,3 +1,5 @@
+# dev fuckery? force SHELL to bash
+export SHELL=$(which bash)
 # allow ^-o
 stty discard '^-'
 
@@ -36,11 +38,6 @@ shopt -s extglob
 
 # source bash completion on OS X 
 [[ -r "/usr/local/etc/profile.d/bash_completion.sh" ]] && . "/usr/local/etc/profile.d/bash_completion.sh"
-# if [ -d $(brew --prefix)/etc/bash_completion.d ]; then
-#     for f in $(brew --prefix)/etc/bash_completion.d/*; do
-#         source $f
-#     done
-# fi
 source ~/.kube/kubectl_autocompletion
 
 source ~/.bashfunc
@@ -49,10 +46,10 @@ source ~/.bashlocal
 
 # load dev, but only if present and the shell is interactive
 if [[ -f /opt/dev/dev.sh ]] && [[ $- == *i* ]]; then
-  source /opt/dev/dev.sh
+ source /opt/dev/dev.sh
 fi
 
-# cloudplatform: add Shopify clusters to your local kubernetes config
+# # cloudplatform: add Shopify clusters to your local kubernetes config
 export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/lmunro/.kube/config:/Users/lmunro/.kube/config.shopify.cloudplatform
 for file in /Users/lmunro/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
 kubectl-short-aliases
@@ -71,3 +68,5 @@ if [ -n "$PS1" ]; then
     fi
 fi
 
+# cloudplatform: add Shopify clusters to your local kubernetes config
+export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/lmunro/.kube/config:/Users/lmunro/.kube/config.shopify.cloudplatform

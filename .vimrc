@@ -11,15 +11,18 @@ call plug#begin('~/.vim/plugged')
         Plug 'jodosha/vim-godebug'
         Plug 'hashivim/vim-terraform'
         Plug 'juliosueiras/vim-terraform-completion'
+        " Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+        Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
         let g:deoplete#omni_patterns = {}
         let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
         let g:deoplete#enable_at_startup = 1
     endif
 
     " Plug 'jiangmiao/auto-pairs'
-    "Plug 'vim-syntastic/syntastic'
+    " Plug 'vim-syntastic/syntastic'
     " Plug 'MattesGroeger/vim-bookmarks'
     " Plug 'StanAngeloff/php.vim'
+    Plug 'ngmy/vim-rubocop'
     Plug 'Yggdroot/indentLine'
     Plug 'chase/vim-ansible-yaml'
     Plug 'crusoexia/vim-monokai'
@@ -35,11 +38,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-rails'
     Plug 'tpope/vim-rhubarb'
     Plug 'vim-airline/vim-airline'
-" Initialize plugin system
+    Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
 call plug#end()
 
 
-
+set hidden " Required for specific actions that require multiple buffers
 set nocompatible
 filetype plugin indent on
 set visualbell
@@ -68,8 +74,8 @@ cnoreabbrev Q q
 set termguicolors
 syntax enable
 set background=dark
-colorscheme ir_black
-" colorscheme monokai
+" colorscheme ir_black
+colorscheme monokai
 
 if has('gui_running')
     set background=light
@@ -157,7 +163,7 @@ endif
 let g:ctrlp_by_filename = 0
 
 " bind K to grep word under cursor
-nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
+" nnoremap K :grep! "\b<C-R><C-W>\b"<CR>:cw<CR>
 "command -nargs=+ -complete=file -bar Ag silent! grep! <args>|cwindow|redraw!
 
 " pane navigation
@@ -178,6 +184,7 @@ au Filetype ruby setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " SHOP likes shell to look like ruby
 au Filetype sh setlocal tabstop=2 softtabstop=2 shiftwidth=2
+au Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " so does html. We set indentation to 2 spaces
 au Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2
@@ -194,8 +201,17 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-let g:go_auto_sameids = 1
-"let g:go_auto_type_info = 1
+" let g:go_auto_sameids = 1
+" let g:go_def_mode = 'godef' " the default is 'guru'
+let g:go_auto_type_info = 1
+let g:syntastic_go_checkers = ['go', 'golint', 'govet']
+
+let g:LanguageClient_serverCommands = {
+    \ 'go': ['gopls']
+    \ }
+" Run gofmt and goimports on save
+autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
+
 
 au FileType go nmap <leader>gb :GoBuild<cr>
 au FileType go nmap <leader>gc :GoCoverageToggle -short<cr>
@@ -204,7 +220,6 @@ au Filetype go nmap <leader>gah <Plug>(go-alternate-split)
 au Filetype go nmap <leader>gav <Plug>(go-alternate-vertical)
 au FileType go nmap <leader>gt :GoTest -short<cr>
 autocmd FileType go nmap <Leader>i <Plug>(go-info)<Paste>
-let g:syntastic_go_checkers = ['go', 'golint', 'govet']
 
 " jenkins!
 au BufNewFile,BufRead Jenkinsfile setf groovy
@@ -232,6 +247,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 " vim-terraform
 let g:terraform_align=1
+let g:terraform_fmt_on_save=1
 
 " ALE
 let g:ale_set_highlights = 0

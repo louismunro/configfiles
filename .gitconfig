@@ -1,7 +1,7 @@
 [user]
-	name =  Louis Munro
+	name = Louis Munro
 	email = louis.munro@shopify.com
-    # you chould configure this manually... 
+    # you should configure this manually... 
 
 [alias]
     st = status
@@ -11,6 +11,7 @@
     df = diff
     lg = log -p
     who = shortlog -s --
+    gpr = push -u origin HEAD
 [init]
 	templatedir = ~/.git_template
 [core]
@@ -23,3 +24,8 @@
 	version = 2
 [credential]
 	helper = osxkeychain
+[filter "lfs"]
+	process = git-lfs filter-process
+	required = true
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
