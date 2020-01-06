@@ -10,8 +10,10 @@ alias addfunc="$EDITOR ~/.bashfunc; source ~/.bashfunc"
 alias addlocal="$EDITOR ~/.bashlocal; source ~/.bashlocal"
 alias k=kubectl
 alias kdesc="kubectl describe"
-alias v=vim
+alias kdep="kubectl get deploy -owide"
+alias v=nvim
 alias nv=nvim
+alias view="nvim -R"
 alias g=git
 alias vg='vagrant'
 alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
@@ -21,6 +23,7 @@ alias kx=kubectx
 alias kn=kubens
 alias knodes="kubectl get nodes -owide"
 alias ltr='ls -ltrh'
+alias ltrh='ls -ltrh'
 # enable completion for "k" in addition to kubectl
 complete -o default -o nospace -F __start_kubectl k
 alias py=python3
@@ -28,3 +31,5 @@ alias gst='git status'
 alias t=tig
 alias tst='tig status'
 alias rb=ruby
+alias grep=egrep
+alias ctx='export CTX=`kubectl config current-context`'

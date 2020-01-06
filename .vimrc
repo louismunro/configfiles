@@ -21,7 +21,6 @@ call plug#begin('~/.vim/plugged')
     " Plug 'jiangmiao/auto-pairs'
     " Plug 'vim-syntastic/syntastic'
     " Plug 'MattesGroeger/vim-bookmarks'
-    " Plug 'StanAngeloff/php.vim'
     Plug 'ngmy/vim-rubocop'
     Plug 'Yggdroot/indentLine'
     Plug 'chase/vim-ansible-yaml'
@@ -31,7 +30,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'majutsushi/tagbar'
     Plug 'scrooloose/nerdtree'
-    Plug 'stephpy/vim-php-cs-fixer'
     Plug 'tell-k/vim-autopep8'
     Plug 'tpope/vim-commentary' 
     Plug 'tpope/vim-fugitive'
@@ -69,6 +67,7 @@ nnoremap <F11> :buffers<CR>:buffer<Space>
 " The following lets :W acts like :w and :Q like :q
 cnoreabbrev W w
 cnoreabbrev Q q
+cnoreabbrev Qa qa
 
 " appearance
 set termguicolors
@@ -191,6 +190,7 @@ au Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 
 " golang
+"let g:go_version_warning = 0 " remove when upgrading neovim
 let g:go_fmt_command = "goimports"
 
 let g:go_highlight_build_constraints = 1
@@ -273,15 +273,3 @@ let g:terraform_completion_keys = 1
 
 " (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
 let g:terraform_registry_module_completion = 0
-
-" PHP fixer 
-" If you use php-cs-fixer version 2.x
-let g:php_cs_fixer_rules = "@PSR2"                  " options: --rules (default:@PSR2)
-"let g:php_cs_fixer_cache = ".php_cs.cache"         " options: --cache-file
-"let g:php_cs_fixer_config_file = '.php_cs'         " options: --config
-" End of php-cs-fixer version 2 config params
-
-let g:php_cs_fixer_php_path = "php"               " Path to PHP
-let g:php_cs_fixer_enable_default_mapping = 1     " Enable the mapping by default (<leader>pcd)
-let g:php_cs_fixer_dry_run = 0                    " Call command with dry-run option
-let g:php_cs_fixer_verbose = 0                    " Return the output of command if 1, else an inline information.

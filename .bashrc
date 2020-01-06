@@ -49,13 +49,14 @@ if [[ -f /opt/dev/dev.sh ]] && [[ $- == *i* ]]; then
  source /opt/dev/dev.sh
 fi
 
-# # cloudplatform: add Shopify clusters to your local kubernetes config
+# cloudplatform: add Shopify clusters to your local kubernetes config
 export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/lmunro/.kube/config:/Users/lmunro/.kube/config.shopify.cloudplatform
 for file in /Users/lmunro/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
 kubectl-short-aliases
 
 # set prompt 
 if [ -n "$PS1" ]; then 
+  export PROMPT_DIRTRIM=5
     if [[ -f /usr/local/opt/kube-ps1/share/kube-ps1.sh ]]; then
         # cf https://github.com/jonmosco/kube-ps1
         source /usr/local/opt/kube-ps1/share/kube-ps1.sh
@@ -68,5 +69,5 @@ if [ -n "$PS1" ]; then
     fi
 fi
 
-# cloudplatform: add Shopify clusters to your local kubernetes config
-export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/lmunro/.kube/config:/Users/lmunro/.kube/config.shopify.cloudplatform
+# init rbenv
+# eval "$(rbenv init -)"
