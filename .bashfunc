@@ -65,41 +65,13 @@ function kcrash {
                             || ( eval($F[1]) != 1 && $F[2] !~ /Completed/ )
                             ) && print'
 } 
-export -f kcrash
+export -f kcrash >/dev/null
 
 # roule une commande sur chacune des nodes
 krun() {
   for k in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}' ) ; do 
     echo -n "$k :" ; ssh $k $@
   done
-}
-
-# one password login
-op() {
-    if [[ -z "$OP_SESSION_nuglif" ]]; then
-        eval $( command op signin nuglif )
-    fi
-
-    # check again to make sure authentication suceeded
-    if [[ -z "$OP_SESSION_nuglif" ]]; then
-        return 1
-    fi
-
-    if [[ $# -lt 1 ]]; then 
-        return 0
-    fi
-    command op $@ 
-}
-
-#tf() {
-#    op && terraform $@
-#} 
-
-setcreds() {
-    read -e -p "AWS_ACCESS_KEY_ID: " AWS_ACCESS_KEY_ID
-    read -e -p "AWS_SECRET_ACCESS_KEY: " AWS_SECRET_ACCESS_KEY
-    export AWS_ACCESS_KEY_ID
-    export AWS_SECRET_ACCESS_KEY
 }
 
 # alias kpods='kubectl get pods -owide'
@@ -115,6 +87,6 @@ function goplay {
   make run
   popd
 }
-export -f goplay
+export -f goplay >/dev/null
 
 
