@@ -273,3 +273,20 @@ let g:terraform_completion_keys = 1
 
 " (Optional) Default: 1, enable(1)/disable(0) terraform module registry completion
 let g:terraform_registry_module_completion = 0
+
+
+" remap arrow keys 
+noremap <Up> <C-W>+
+noremap <Down> <C-W>-
+noremap <Left> <C-W>>
+noremap <Right> <C-W><
+
+inoremap <Up> <C-W>+
+inoremap <Down> <C-W>-
+inoremap <Left> <C-W>>
+inoremap <Right> <C-W><
+
+vnoremap <Up> <C-W>+
+vnoremap <Down> <C-W>-
+vnoremap <Left> <C-W>>
+vnoremap <Right> <C-W><
