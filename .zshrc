@@ -24,6 +24,10 @@ setopt extendedhistory
 setopt banghist 
 setopt histverify
 
+# use bash style "word" definition for line editing
+autoload -U select-word-style
+select-word-style bash
+
 # initialize fancy completion
 autoload -Uz compinit && compinit
 
