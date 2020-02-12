@@ -25,7 +25,7 @@ alias knodes="kubectl get nodes -owide"
 alias ltr='ls -ltrh'
 alias ltrh='ls -ltrh'
 # enable completion for "k" in addition to kubectl
-complete -o default -o nospace -F __start_kubectl k
+# complete -o default -o nospace -F __start_kubectl k
 alias py=python3
 alias gst='git status'
 alias t=tig

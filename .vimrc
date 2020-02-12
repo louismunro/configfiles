@@ -28,6 +28,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'elzr/vim-json'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'buoto/gotests-vim'
     Plug 'majutsushi/tagbar'
     Plug 'scrooloose/nerdtree'
     Plug 'tell-k/vim-autopep8'

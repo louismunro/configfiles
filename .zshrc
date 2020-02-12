@@ -8,6 +8,7 @@ export LESS=im # set pager options (see man 1 less)
 
 
 # ZSH options
+bindkey -e # readline `emacs` mode editing
 export SAVEHIST=10000
 export HISTSIZE=10000
 setopt noclobber
@@ -42,7 +43,6 @@ source ~/.bashfunc
 
 # set prompt 
 if [ -n "$PS1" ]; then 
-  export PROMPT_DIRTRIM=5
     if [[ -f /usr/local/opt/kube-ps1/share/kube-ps1.sh ]]; then
         # cf https://github.com/jonmosco/kube-ps1
         source /usr/local/opt/kube-ps1/share/kube-ps1.sh
@@ -50,8 +50,8 @@ if [ -n "$PS1" ]; then
         KUBE_PS1_CTX_COLOR=yellow
         KUBE_PS1_NS_COLOR=yellow
         NEWLINE=$'\n'
-        PS1='$(kube_ps1) %F{green}%3~%f${NEWLINE}%F{cyan}$(parse_git_branch)%f %?> %# '; 
+        PS1='$(kube_ps1) %F{green}%3~%f${NEWLINE}%F{cyan}$(parse_git_branch)%f %(?..%F{red}%?%f)> %# '; 
     else
-        PS1='%F{green}%3~%f${NEWLINE}%F{cyan}$(parse_git_branch)%f %?> %# '; 
+        PS1='%F{green}%3~%f${NEWLINE}%F{cyan}$(parse_git_branch)%f %(?..%F{red}%?%f)> %# '; 
     fi
 fi
