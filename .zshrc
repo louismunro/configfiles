@@ -23,6 +23,7 @@ setopt incappendhistory
 setopt histignoredups
 setopt histreduceblanks
 setopt extendedhistory
+setopt interactivecomments
 # Perform textual history expansion, csh-style, treating the character ‘!’ specially.
 setopt banghist 
 setopt histverify
