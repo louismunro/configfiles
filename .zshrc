@@ -27,6 +27,12 @@ setopt interactivecomments
 # Perform textual history expansion, csh-style, treating the character ‘!’ specially.
 setopt banghist 
 setopt histverify
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
 
 # use bash style "word" definition for line editing
 autoload -U select-word-style

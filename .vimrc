@@ -78,9 +78,9 @@ set background=dark
 colorscheme monokai
 
 if has('gui_running')
-    set background=light
+    set background=dark
     colorscheme solarized
-    set guifont=Monaco:h12
+    "set guifont=Monaco:h12
     set guioptions-=T
 else
     set background=dark
