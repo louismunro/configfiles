@@ -12,7 +12,6 @@ alias k=kubectl
 alias kdesc="kubectl describe"
 alias kdep="kubectl get deploy -owide"
 alias v=nvim
-alias nv=nvim
 alias view="nvim -R"
 alias g=git
 alias vg='vagrant'
@@ -33,3 +32,5 @@ alias tst='tig status'
 alias rb=ruby
 alias grep=egrep
 alias ctx='export CTX=`kubectl config current-context`'
+alias ksort='kubectl get pods --sort-by=.metadata.creationTimestamp'
+alias getruby='chruby $(chruby | sort | tail -n 1)'

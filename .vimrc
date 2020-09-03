@@ -63,6 +63,7 @@ set matchpairs+=<:>             " Allow % to bounce between angles too
 set pastetoggle=<F12>           " toggle paste mode with F12
 set nu                          " show line numbers
 
+nnoremap <F9>  :IndentLinesToggle<cr>
 nnoremap <F10> :registers<cr>
 nnoremap <F11> :buffers<CR>:buffer<Space>
 " The following lets :W acts like :w and :Q like :q
@@ -248,7 +249,7 @@ map <C-n> :NERDTreeToggle<CR>
 
 " vim-terraform
 let g:terraform_align=1
-let g:terraform_fmt_on_save=1
+"let g:terraform_fmt_on_save=1
 
 " ALE
 let g:ale_set_highlights = 0
