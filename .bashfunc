@@ -60,11 +60,11 @@ function kcrash {
 export -f kcrash >/dev/null
 
 # roule une commande sur chacune des nodes
-krun() {
-  for k in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}' ) ; do 
-    echo -n "$k :" ; ssh $k $@
-  done
-}
+# krun() {
+#   for k in $(kubectl get nodes -o jsonpath='{.items[*].metadata.name}' ) ; do 
+#     echo -n "$k :" ; ssh $k $@
+#   done
+# }
 
 # alias kpods='kubectl get pods -owide'
 function kpods {
@@ -81,4 +81,27 @@ function goplay {
 }
 export -f goplay >/dev/null
 
+function gpm {
+    git co master
+    git pull
+    git co -
+}
 
+function gcleanup {
+    current=$(git branch --show-current)
+    if [[ "$current" == "master" ]]
+    then
+      return
+    fi
+    git co master
+    git pull
+    git branch -d $current
+}
+export -f gcleanup >/dev/null
+
+function kubeup {
+    pushd /Users/lmunro/src/github.com/Shopify/cloudplatform
+    dev kubeconfig
+    popd
+}
+export -f kubeup >/dev/null

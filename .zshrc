@@ -39,7 +39,8 @@ autoload -U select-word-style
 select-word-style bash
 
 # initialize fancy completion
-autoload -Uz compinit && compinit
+FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+autoload -Uz compinit ; compinit
 
 # cloudplatform: add Shopify clusters to your local kubernetes config
 export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/lmunro/.kube/config:/Users/lmunro/.kube/config.shopify.cloudplatform
@@ -47,6 +48,7 @@ export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/lmunro/.kube/config:/Users/l
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
+source /usr/local/etc/profile.d/kubecompletion.zsh
 for file in /Users/lmunro/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
 kubectl-short-aliases
 
@@ -69,3 +71,7 @@ if [ -n "$PS1" ]; then
         PS1='%F{green}%3~%f${NEWLINE}%F{cyan}$(parse_git_branch)%f %(?..%F{red}%?%f)> %# '; 
     fi
 fi
+
+[[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
+
+[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)

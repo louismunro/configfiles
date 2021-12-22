@@ -26,6 +26,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'chase/vim-ansible-yaml'
     Plug 'crusoexia/vim-monokai'
     Plug 'ctrlpvim/ctrlp.vim'
+    Plug 'dense-analysis/ale'
     Plug 'elzr/vim-json'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'buoto/gotests-vim'
@@ -33,8 +34,10 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdtree'
     Plug 'tell-k/vim-autopep8'
     Plug 'tpope/vim-commentary' 
+    Plug 'tpope/vim-endwise'
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rails'
+    Plug 'tpope/vim-rake'
     Plug 'tpope/vim-rhubarb'
     Plug 'vim-airline/vim-airline'
     Plug 'autozimu/LanguageClient-neovim', {
@@ -42,7 +45,6 @@ call plug#begin('~/.vim/plugged')
     \ 'do': 'bash install.sh',
     \ }
 call plug#end()
-
 
 set hidden " Required for specific actions that require multiple buffers
 set nocompatible
@@ -63,6 +65,8 @@ set matchpairs+=<:>             " Allow % to bounce between angles too
 set pastetoggle=<F12>           " toggle paste mode with F12
 set nu                          " show line numbers
 
+" the next line disables ex mode
+nnoremap Q <Nop>
 nnoremap <F9>  :IndentLinesToggle<cr>
 nnoremap <F10> :registers<cr>
 nnoremap <F11> :buffers<CR>:buffer<Space>
@@ -71,6 +75,8 @@ cnoreabbrev W w
 cnoreabbrev Q q
 cnoreabbrev Qa qa
 
+" toggle between recent files
+nnoremap <leader><leader> :b#<CR>
 " appearance
 set termguicolors
 syntax enable
@@ -190,6 +196,8 @@ au Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 " so does html. We set indentation to 2 spaces
 au Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
+" graphl too 
+au Filetype graphql setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " golang
 "let g:go_version_warning = 0 " remove when upgrading neovim
@@ -253,6 +261,9 @@ let g:terraform_align=1
 
 " ALE
 let g:ale_set_highlights = 0
+let g:ale_linters = { 'ruby': [ 'rubocop' ], }
+let g:ale_fixers = { 'ruby': [ 'rubocop' ], }
+let g:ale_fix_on_save = 0
 
 " terraform completion
 let g:syntastic_always_populate_loc_list = 1
