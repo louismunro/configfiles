@@ -1,3 +1,6 @@
+# Add path to homebrew utils
+[[ -x /opt/homebrew/bin/brew ]] && eval $(/opt/homebrew/bin/brew shellenv)
+
 if [[ -f /opt/dev/dev.sh ]]; then source /opt/dev/dev.sh; fi
 if [ -e /Users/lmunro/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/lmunro/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
 
@@ -48,7 +51,7 @@ export KUBECONFIG=${KUBECONFIG:+$KUBECONFIG:}/Users/lmunro/.kube/config:/Users/l
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
-source /usr/local/etc/profile.d/kubecompletion.zsh
+source <(kubectl completion zsh)
 for file in /Users/lmunro/src/github.com/Shopify/cloudplatform/workflow-utils/*.bash; do source ${file}; done
 kubectl-short-aliases
 
@@ -59,9 +62,9 @@ source ~/.bashfunc
 
 # set prompt 
 if [ -n "$PS1" ]; then 
-    if [[ -f /usr/local/opt/kube-ps1/share/kube-ps1.sh ]]; then
+    if [[ -f /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh ]]; then
         # cf https://github.com/jonmosco/kube-ps1
-        source /usr/local/opt/kube-ps1/share/kube-ps1.sh
+        source /opt/homebrew/opt/kube-ps1/share/kube-ps1.sh
         KUBE_PS1_SYMBOL_ENABLE=false
         KUBE_PS1_CTX_COLOR=yellow
         KUBE_PS1_NS_COLOR=yellow
@@ -74,4 +77,3 @@ fi
 
 [[ -f /opt/dev/sh/chruby/chruby.sh ]] && type chruby >/dev/null 2>&1 || chruby () { source /opt/dev/sh/chruby/chruby.sh; chruby "$@"; }
 
-[[ -x /usr/local/bin/brew ]] && eval $(/usr/local/bin/brew shellenv)
