@@ -52,7 +52,7 @@ function yaml2json {
 function kcrash { 
     local match
     match=${1:-.}
-    kubectl get pods -owide  | grep $match |
+    kubectl get pods -owide | grep $match |
             perl -wanl -e  '( $. == 1 
                             || ( eval($F[1]) != 1 && $F[2] !~ /Completed/ )
                             ) && print'
@@ -82,20 +82,25 @@ function goplay {
 export -f goplay >/dev/null
 
 function gpm {
-    git co master
+    git checkout master || git checkout main
     git pull
     git co -
 }
 
 function gcleanup {
     current=$(git branch --show-current)
-    if [[ "$current" == "master" ]]
+    if [[ "$current" == "master"  ||  "$current" == "main" ]]
     then
       return
     fi
-    git co master
-    git pull
-    git branch -d $current
+
+    if git checkout master ; then
+      git pull
+      git branch -d "$current"
+    elif  git checkout main ; then
+      git pull
+      git branch -d "$current"
+    fi
 }
 export -f gcleanup >/dev/null
 

@@ -5,32 +5,22 @@ call pathogen#infect()
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
     " Make sure you use single quotes
-    if has('nvim')
-        Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-        Plug 'zchee/deoplete-go', { 'do': 'make'}
-        Plug 'jodosha/vim-godebug'
-        Plug 'hashivim/vim-terraform'
-        Plug 'juliosueiras/vim-terraform-completion'
-        " Plug 'mdempsky/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-        Plug 'stamblerre/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-        let g:deoplete#omni_patterns = {}
-        let g:deoplete#omni_patterns.terraform = '[^ *\t"{=$]\w*'
-        let g:deoplete#enable_at_startup = 1
-    endif
-
-    " Plug 'jiangmiao/auto-pairs'
-    " Plug 'vim-syntastic/syntastic'
-    " Plug 'MattesGroeger/vim-bookmarks'
     Plug 'ngmy/vim-rubocop'
     Plug 'Yggdroot/indentLine'
     Plug 'chase/vim-ansible-yaml'
     Plug 'crusoexia/vim-monokai'
     Plug 'ctrlpvim/ctrlp.vim'
+
+
+    Plug 'vim-airline/vim-airline'
     Plug 'dense-analysis/ale'
+    " Set this. Airline will handle the rest.
+    let g:airline#extensions#ale#enabled = 1
+
     Plug 'elzr/vim-json'
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'buoto/gotests-vim'
-    Plug 'majutsushi/tagbar'
+
     Plug 'scrooloose/nerdtree'
     Plug 'tell-k/vim-autopep8'
     Plug 'tpope/vim-commentary' 
@@ -38,12 +28,55 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-fugitive'
     Plug 'tpope/vim-rails'
     Plug 'tpope/vim-rake'
-    Plug 'tpope/vim-rhubarb'
-    Plug 'vim-airline/vim-airline'
-    Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
+    " Plug 'tpope/vim-rhubarb' " Fancy github support :-)
+
+    if has('nvim')
+        Plug 'jodosha/vim-godebug'
+        Plug 'hashivim/vim-terraform'
+        Plug 'juliosueiras/vim-terraform-completion'
+
+        Plug 'jparise/vim-graphql'
+
+        Plug 'neoclide/coc.nvim', {'branch': 'release'}
+        " don't give |ins-completion-menu| messages.
+        set shortmess+=c
+        " always show signcolumns
+        set signcolumn=yes
+        set signcolumn=number
+
+        function! CheckBackspace() abort
+          let col = col('.') - 1
+          return !col || getline('.')[col - 1]  =~# '\s'
+        endfunction
+        " Use tab for trigger completion with characters ahead and navigate.
+        " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+        " other plugin before putting this into your config.
+        inoremap <silent><expr> <TAB>
+              \ coc#pum#visible() ? coc#pum#next(1):
+              \ CheckBackspace() ? "\<Tab>" :
+              \ coc#refresh()
+        inoremap <expr><S-TAB> coc#pum#visible() ? coc#pum#prev(1) : "\<C-h>"
+
+        " Make <CR> to accept selected completion item or notify coc.nvim to format
+        " <C-g>u breaks current undo, please make your own choice.
+        inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                                      \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+        " Remap for rename current word
+        nmap <leader>rn <Plug>(coc-rename)
+        " Remap for format selected region
+        vmap <leader>f  <Plug>(coc-format-selected)
+        nmap <leader>f  <Plug>(coc-format-selected)
+        " Remap keys for gotos
+        nmap <silent> gd <Plug>(coc-definition)
+        nmap <silent> gy <Plug>(coc-type-definition)
+        nmap <silent> gi <Plug>(coc-implementation)
+        nmap <silent> gr <Plug>(coc-references)
+        " disable vim-go :GoDef short cut (gd)
+        " this is handled by LanguageClient [LC]
+        let g:go_def_mapping_enabled = 0
+    endif
 call plug#end()
 
 set hidden " Required for specific actions that require multiple buffers
@@ -64,12 +97,15 @@ set scrolloff=3                 " keep at least three line visible before/after 
 set matchpairs+=<:>             " Allow % to bounce between angles too
 set pastetoggle=<F12>           " toggle paste mode with F12
 set nu                          " show line numbers
+set cmdheight=2                 " Give more space for displaying messages.
 
 " the next line disables ex mode
 nnoremap Q <Nop>
 nnoremap <F9>  :IndentLinesToggle<cr>
 nnoremap <F10> :registers<cr>
-nnoremap <F11> :buffers<CR>:buffer<Space>
+" nnoremap <F11> :buffers<CR>:buffer<Space>
+nnoremap <F11> :CtrlPBuffer<CR>
+nnoremap <F12> :CtrlP<CR>
 " The following lets :W acts like :w and :Q like :q
 cnoreabbrev W w
 cnoreabbrev Q q
@@ -149,10 +185,6 @@ augroup resCur
   autocmd BufWinEnter * call ResCur()
 augroup END
 
-" remap jj as esc key
-ino jj <esc>
-cno jj <c-c>
-
 " The Silver Searcher
 if executable('ag')
   " Use ag over grep
@@ -165,7 +197,7 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-
+let g:ctrlp_cmd = 'CtrlPBuffer'
 "Set this to 1 to set searching by filename (not full path) as the default:
 let g:ctrlp_by_filename = 0
 
@@ -196,7 +228,7 @@ au Filetype yaml setlocal tabstop=2 softtabstop=2 shiftwidth=2
 " so does html. We set indentation to 2 spaces
 au Filetype html setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
-" graphl too 
+" graphql too 
 au Filetype graphql setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " golang
@@ -211,16 +243,13 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-" let g:go_auto_sameids = 1
-" let g:go_def_mode = 'godef' " the default is 'guru'
+let g:go_def_mode = 'gopls'
+let g:go_info_mode = 'gopls'
 let g:go_auto_type_info = 1
-let g:syntastic_go_checkers = ['go', 'golint', 'govet']
 
 let g:LanguageClient_serverCommands = {
     \ 'go': ['gopls']
     \ }
-" Run gofmt and goimports on save
-autocmd BufWritePre *.go :call LanguageClient#textDocument_formatting_sync()
 
 
 au FileType go nmap <leader>gb :GoBuild<cr>
@@ -249,8 +278,8 @@ autocmd BufNewFile,BufRead *yaml  set ft=ansible
 au Filetype ansible setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " vim-json 
-" Disable syntax concealing (hides quotes)
-let g:vim_json_syntax_conceal = 0
+" Prevent indentline from breaking quoting around keys and values
+let g:indentLine_concealcursor=""
 
 " nerdtree (Control n)
 map <C-n> :NERDTreeToggle<CR>

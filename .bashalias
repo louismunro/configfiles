@@ -33,5 +33,10 @@ alias rb=ruby
 alias grep=egrep
 alias ctx='export CTX=`kubectl config current-context`'
 alias ksort='kubectl get pods --sort-by=.metadata.creationTimestamp'
+alias kdesc='kubectl describe'
 alias getruby='chruby $(chruby | sort | tail -n 1)'
 alias rtags=/Users/lmunro/.git_template/hooks/ctags
+
+# get pods by start time
+alias kpotime='kubectl get po --sort-by=.status.startTime -owide'
+alias sdebug='/Users/lmunro/src/github.com/Shopify/network-platform/scripts/shopify_debug'
