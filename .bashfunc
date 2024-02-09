@@ -70,7 +70,7 @@ export -f kcrash >/dev/null
 function kpods {
     local match
     match=${1:-.}
-    kubectl get pods -owide | grep $match
+    kubectl get pods -owide | egrep $match
 }
 
 function goplay {
@@ -82,7 +82,9 @@ function goplay {
 export -f goplay >/dev/null
 
 function gpm {
-    git checkout master || git checkout main
+    # git checkout main || git checkout master
+    # depends on setting up an alias for git default
+    git default
     git pull
     git co -
 }
@@ -94,12 +96,14 @@ function gcleanup {
       return
     fi
 
-    if git checkout master ; then
+    # git checkout main || git checkout master
+    # depends on setting up an alias for git default
+    if git default; then
       git pull
       git branch -d "$current"
-    elif  git checkout main ; then
-      git pull
-      git branch -d "$current"
+    else
+      git co "$current"
+      echo "could not check out default branch" >&2
     fi
 }
 export -f gcleanup >/dev/null

@@ -13,7 +13,7 @@ call plug#begin('~/.vim/plugged')
 
 
     Plug 'vim-airline/vim-airline'
-    Plug 'dense-analysis/ale'
+    " Plug 'dense-analysis/ale'
     " Set this. Airline will handle the rest.
     let g:airline#extensions#ale#enabled = 1
 
@@ -246,11 +246,13 @@ let g:go_highlight_types = 1
 let g:go_def_mode = 'gopls'
 let g:go_info_mode = 'gopls'
 let g:go_auto_type_info = 1
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_command = "golangci-lint"
+let g:go_metalinter_command_enabled = ['vet', 'revive', 'errcheck']
 
 let g:LanguageClient_serverCommands = {
     \ 'go': ['gopls']
     \ }
-
 
 au FileType go nmap <leader>gb :GoBuild<cr>
 au FileType go nmap <leader>gc :GoCoverageToggle -short<cr>
@@ -290,7 +292,8 @@ let g:terraform_align=1
 
 " ALE
 let g:ale_set_highlights = 0
-let g:ale_linters = { 'ruby': [ 'rubocop' ], }
+" disable ale for go since it conflicts with vim-go
+let g:ale_linters = { 'ruby': [ 'rubocop' ], 'go': []}
 let g:ale_fixers = { 'ruby': [ 'rubocop' ], }
 let g:ale_fix_on_save = 0
 
